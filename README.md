@@ -19,9 +19,13 @@ Provide clear visual and downloadable reports
 🛠 Technologies Used
 
 Python — Data processing and logic
+
 Streamlit — Web interface
+
 Pandas — Data analysis
+
 Streamlit Charts — Visualization
+
 GitHub — Version control
 
 📂 Project Structure
