@@ -37,14 +37,16 @@ def recommend(zone):
 
 if uploaded_file and st.button("Run Analysis"):
     if uploaded_file.name.endswith(".csv"):
-    df = pd.read_csv(uploaded_file)
-else:
-    df=pd.read_excel(uploaded file)
+        df = pd.read_csv(uploaded_file)
+    else:
+        df = pd.read_excel(uploaded_file)
+
     agg = aggregate_data(df)
     agg["Zone"] = agg.apply(classify, axis=1)
     agg["Recommended_Action"] = agg["Zone"].apply(recommend)
     st.session_state["result"] = agg
     st.success("Analysis Completed")
+
 
 if "result" in st.session_state:
     result = st.session_state["result"]
@@ -68,5 +70,6 @@ if "result" in st.session_state:
         file_name="aadhaar_gati_report.csv",
         mime="text/csv"
     )
+
 
 
