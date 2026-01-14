@@ -25,7 +25,7 @@ Built as part of the UIDAI Hackathon to improve efficiency, transparency, and da
 
     Pandas — Data analysis
 
-    Streamlit Charts — Visualization
+    Matplotlib /Streamlit Charts — Visualization
 
     GitHub — Version control
 
