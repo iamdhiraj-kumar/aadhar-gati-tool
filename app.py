@@ -10,7 +10,8 @@ st.image(logo, width=180)
 st.title("Aadhaar-Gati: Smart Resource Allocation Tool")
 st.write("Data-driven optimization of Aadhaar services at district level")
 
-uploaded_file = st.file_uploader("Upload Aadhaar District Data (CSV or Excel)", type=["csv","xlsx","xls")]
+uploaded_file = st.file_uploader("Upload Aadhaar District Data (CSV or Excel)", type=["csv","xlsx","xls"]
+                                )
 
 def aggregate_data(df):
     return df.groupby("District").agg({
@@ -67,4 +68,5 @@ if "result" in st.session_state:
         file_name="aadhaar_gati_report.csv",
         mime="text/csv"
     )
+
 
