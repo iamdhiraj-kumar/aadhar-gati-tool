@@ -32,7 +32,9 @@ Built as part of the UIDAI Hackathon to improve efficiency, transparency, and da
 **📂 Project Structure**
 
 aadhaar-gati-tool/
+
 │
+
 ├── app.py                # Main Streamlit application
 
 ├── requirements.txt      # Required Python libraries
