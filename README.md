@@ -47,17 +47,17 @@ aadhaar-gati-tool/
 
 Upload a CSV file with the following columns:
 
-**Column Name         	    Description**
+**Column Name         	   __ Description**
 
-   District	                District name
+   District	                -District name
    
-  Update_Count	            Number of Aadhaar updates
+  Update_Count	              -Number of Aadhaar updates
   
-  New_Enrolment_Count	      Number of new enrolments
+  New_Enrolment_Count	     -Number of new enrolments
 
 **Example:**
 
-**District	     Update_Count	        New_Enrolment_Count**
+**District	    __ Update_Count	      __  New_Enrolment_Count**
 
 Lucknow	            5400	              2100
 
@@ -67,7 +67,7 @@ Kanpur	            4200	              1800
 
 1️⃣ Install dependencies
 
-   pip install -r requirements.txt
+    pip install -r requirements.txt
    
 2️⃣ Run the application
 
@@ -99,13 +99,13 @@ The tool will automatically open in your browser.
 
 **📤 Output**
 
-Interactive data tables
+-Interactive data tables
 
-Visual charts
+-Visual charts
 
-Downloadable CSV report
+-Downloadable CSV report
 
-Final recommendations for each district
+-Final recommendations for each district
 
 ## 👥 Team
 
