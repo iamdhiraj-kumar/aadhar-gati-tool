@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px  # We use Plotly for interactive, pro-level graphs
 from PIL import Image
 
 # 1. Page Configuration
@@ -11,16 +10,16 @@ try:
     logo = Image.open("uidai_logo.png")
     st.image(logo, width=180)
 except FileNotFoundError:
-    st.warning("⚠️ 'uidai_logo.png' not found. Ensure it is in the same folder.")
+    st.warning("⚠️ 'uidai_logo.png' not found.")
 
 st.title("Aadhaar-Gati: Smart Resource Allocation Tool")
 st.markdown("**Data-driven optimization of Aadhaar services using 75th Percentile Thresholding**")
 
 # 2. File Upload
-uploaded_file = st.file_uploader("Upload Aadhaar District Data (CSV or Excel)", type=["csv", "xlsx", "xls"])
+uploaded_file = st.file_uploader("Upload Aadhaar District Data", type=["csv", "xlsx", "xls"])
 
 if uploaded_file:
-    # Load data based on file type
+    # Load data
     if uploaded_file.name.endswith(".csv"):
         df = pd.read_csv(uploaded_file)
     else:
@@ -67,7 +66,7 @@ if uploaded_file:
 
         district_data["Recommended_Action"] = district_data["Zone"].apply(recommend)
         
-        # Save to session state so data persists
+        # Save to session state
         st.session_state['result'] = district_data
         st.success("✅ Analysis Completed Successfully")
 
@@ -75,61 +74,52 @@ if uploaded_file:
 if 'result' in st.session_state:
     district_data = st.session_state['result']
 
-    # --- STEP E: Advanced Visualizations (For Page 7) ---
+    # --- STEP E: Visualizations (Standard Charts - No Plotly Error) ---
     st.markdown("---")
     st.header("Visual Insights")
 
-    # Layout: Top row with 2 charts
     col1, col2 = st.columns(2)
 
     with col1:
         st.subheader("1. Enrollment vs. Update Trends")
-        # Scatter Plot: Shows the relationship
-        fig_scatter = px.scatter(
-            district_data, 
-            x="New_Enrolment_Count", 
-            y="Update_Count", 
+        st.caption("Scatter Plot: Note how updates (Y-axis) dominate")
+        # Native Scatter Chart
+        st.scatter_chart(
+            district_data,
+            x="New_Enrolment_Count",
+            y="Update_Count",
             color="Zone",
-            size="Update_Count",
-            hover_name="District",
-            title="District Cluster Analysis"
+            size="Update_Count"
         )
-        st.plotly_chart(fig_scatter, use_container_width=True)
 
     with col2:
         st.subheader("2. Zone Distribution")
-        # Pie Chart: Shows what % of districts are High Traffic vs Ghost
-        zone_counts = district_data["Zone"].value_counts().reset_index()
-        zone_counts.columns = ["Zone", "Count"]
-        fig_pie = px.pie(zone_counts, values="Count", names="Zone", title="Percentage of Zones in UP")
-        st.plotly_chart(fig_pie, use_container_width=True)
+        st.caption("Count of districts in each category")
+        # Native Bar Chart for Counts
+        zone_counts = district_data["Zone"].value_counts()
+        st.bar_chart(zone_counts)
 
-    # Layout: Bottom row with Bar Chart
+    st.markdown("---")
     st.subheader("3. Top 30 High-Load Districts (Updates)")
-    # Filter for Top 30 only
+    st.caption("Districts requiring immediate attention (Sorted by Load)")
+    
+    # Filter for Top 30 only and Sort
     top_30_data = district_data.sort_values(by="Update_Count", ascending=False).head(30)
     
-    fig_bar = px.bar(
-        top_30_data,
-        x="District",
-        y="Update_Count",
-        color="Zone",
-        title="Top 30 Districts requiring immediate attention",
-        text_auto=True
+    # Native Bar Chart
+    st.bar_chart(
+        top_30_data.set_index("District")["Update_Count"]
     )
-    st.plotly_chart(fig_bar, use_container_width=True)
 
     # --- STEP F: Final Data Table & Download ---
     st.markdown("---")
     st.subheader("Final Allocation Report")
     
-    # Filter mechanism
     zone_filter = st.multiselect("Filter by Zone", district_data["Zone"].unique(), default=district_data["Zone"].unique())
     filtered_final = district_data[district_data["Zone"].isin(zone_filter)]
     
     st.dataframe(filtered_final, use_container_width=True)
 
-    # Download Button
     csv = filtered_final.to_csv(index=False).encode("utf-8")
     st.download_button(
         "Download Final Report (CSV)",
