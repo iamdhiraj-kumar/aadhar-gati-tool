@@ -1,115 +1,150 @@
-**Aadhaar-Gati Tool 🚀**
-Smart Resource Allocation System for Aadhaar Services
+# Aadhaar-Gati Tool 🚀  
+### Smart Resource Allocation System for Aadhaar Services
 
-Web app Link-https://aadhar-gati-tool-wiyavzfmkof7ekgkws4idh.streamlit.app/
+🔗 **Live Web App:**  
+https://aadhar-gati-tool-wiyavzfmkof7ekgkws4idh.streamlit.app/
 
-**📌 Overview**
+---
 
-Aadhaar-Gati Tool is a data-driven web application designed to help analyze district-wise Aadhaar service data and optimize resource allocation such as staff and mobile units.This tool enables decision-makers to identify high-traffic, balanced, and low-traffic districts and take informed actions accordingly.
-Built as part of the UIDAI Hackathon to improve efficiency, transparency, and data-based planning in Aadhaar operations.
+## 📌 Overview
 
-**🎯 Objectives**
-    *Analyze Aadhaar update and enrolment data
+**Aadhaar-Gati** is a data-driven decision support system designed to optimize Aadhaar service resource allocation at the district level.  
+The project analyzes Aadhaar **enrollment and update trends** to identify operational stress and recommend appropriate deployment of staff and infrastructure.
 
-    *Identify service demand across districts
+The tool is developed as part of the **UIDAI Hackathon** with the objective of improving efficiency, transparency, and data-driven planning in Aadhaar operations.
 
-    *Classify districts into traffic zones
+---
 
-    *Recommend appropriate resource deployment
+## 🎯 Objectives
 
-    *Provide clear visual and downloadable reports
+- Analyze district-wise Aadhaar enrollment and update data  
+- Identify service demand patterns across districts  
+- Classify districts into operational traffic zones  
+- Recommend appropriate resource deployment strategies  
+- Provide clear visual insights and downloadable reports  
 
-**🛠 Technologies Used**
+---
 
-    Python — Data processing and logic
-     
-    Streamlit — Web interface
+## 🧠 Conceptual Insight
 
-    Pandas — Data analysis
+Aadhaar is a **mature digital identity system**.  
+While new enrollments are largely finite, **update services (demographic and biometric)** are recurring throughout a citizen’s lifecycle.
 
-    Matplotlib /Streamlit Charts — Visualization
+Therefore, **update demand is a key indicator of real operational workload**, and planning based only on enrollment data can lead to inefficient resource allocation.
 
-    GitHub — Version control
+Aadhaar-Gati explicitly models this reality using data-driven analysis.
 
-**📂 Project Structure**
+---
+
+## 🧮 Methodology (Core Innovation)
+
+### Dual-Scale Percentile-Based Classification
+
+Instead of using raw totals, Aadhaar-Gati applies **independent percentile thresholding** to ensure fairness between enrollment and update volumes.
+
+### Steps:
+1. Aggregate total enrollment and total updates at district level  
+2. Compute **75th percentile** for:
+   - Enrollment demand  
+   - Update demand  
+3. Classify districts as:
+
+- 🔴 **High Traffic Zone**  
+  Districts exceeding the 75th percentile in either enrollment or updates  
+
+- 🟢 **Balanced Zone**  
+  Districts operating within normal capacity  
+
+- ⚪ **Ghost Zone**  
+  Districts below the 25th percentile in both categories  
+
+This approach prevents high update volumes from masking enrollment needs and ensures balanced planning.
+
+---
+
+## 🔄 Data Analysis Pipeline
+
+Raw UIDAI Data
+↓
+Python Data Analysis (analysis/data_analysis.py)
+↓
+Final District-wise Output CSV
+↓
+Aadhaar-Gati Streamlit Application
+
+---
+
+## 📂 Repository Structure
 
 aadhaar-gati-tool/
+├── analysis/
+│ └── data_analysis.py # Data cleaning, aggregation, percentile logic
+├── app.py # Streamlit web application
+├── data/
+│ └── sample_data.csv # Sample input dataset
+├── output/
+│ └── aadhaar_gati_final_output.csv
+├── visuals/
+│ ├── bar_enrollment.png
+│ ├── bar_updates.png
+│ └── scatter_enroll_update.png
+├── requirements.txt
+├── uidai_logo.png
+└── README.md
 
-│
 
-├── app.py                # Main Streamlit application
+---
 
-├── requirements.txt      # Required Python libraries
+## 📄 Input Data Format
 
-├── uidai_logo.png        # UIDAI logo for UI
+The application accepts a CSV file with the following columns:
 
-├── README.md             # Project documentation
-
-└── sample_data.csv       # Sample input dataset
-
-**📄 Input Data Format**
-
-Upload a CSV file with the following columns:
-
-**Column Name         	   __ Description**
-
-   District	                -District name
-   
-  Update_Count	              -Number of Aadhaar updates
-  
-  New_Enrolment_Count	     -Number of new enrolments
+| Column Name | Description |
+|------------|------------|
+| District | District name |
+| Update_Count | Number of Aadhaar updates |
+| New_Enrolment_Count | Number of new enrollments |
 
 **Example:**
 
-**District	    __ Update_Count	      __  New_Enrolment_Count**
+District,Update_Count,New_Enrolment_Count
+Lucknow,5400,2100
+Kanpur,4200,1800
 
-Lucknow	            5400	              2100
 
-Kanpur	            4200	              1800
+---
 
-**▶ How to Run the Project**
+## 📤 Output
 
-1️⃣ Install dependencies
+- Interactive district-level data tables  
+- Visual insights (bar charts, scatter plots, zone distribution)  
+- Downloadable CSV report  
+- Final operational recommendations for each district  
 
-    pip install -r requirements.txt
-   
+---
+
+## ▶ How to Run the Project Locally
+
+### 1️⃣ Install dependencies
+```bash
+pip install -r requirements.txt
+
 2️⃣ Run the application
+streamlit run app.py
 
-    streamlit run app.py
-    
-The tool will automatically open in your browser.
+The application will open automatically in your browser.
 
-🧠 Logic Used
+🛠 Technologies Used
 
-*Aggregates data district-wise
+Python – Data processing and logic
 
-*Applies threshold-based classification
+Pandas – Data analysis
 
-*Assigns zones:
+Matplotlib / Streamlit Charts – Visualization
 
-     >High Traffic Zone
+Streamlit – Web interface
 
-     >Balanced Zone
-
-     >Ghost Zone
-
-*Generates recommendations:
-
-     >Deploy Permanent Staff
-
-     >Deploy Mobile Aadhaar Vans
-
-     >No Action Required
-
-**📤 Output**
-
--Interactive data tables
-
--Visual charts
-
--Downloadable CSV report
-
--Final recommendations for each district
+GitHub – Version control
 
 ## 👥 Team
 
