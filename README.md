@@ -1,6 +1,8 @@
 **Aadhaar-Gati Tool 🚀**
 Smart Resource Allocation System for Aadhaar Services
 
+Web app Link-https://aadhar-gati-tool-wiyavzfmkof7ekgkws4idh.streamlit.app/
+
 **📌 Overview**
 
 Aadhaar-Gati Tool is a data-driven web application designed to help analyze district-wise Aadhaar service data and optimize resource allocation such as staff and mobile units.This tool enables decision-makers to identify high-traffic, balanced, and low-traffic districts and take informed actions accordingly.
