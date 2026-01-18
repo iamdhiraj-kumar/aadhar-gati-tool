@@ -93,6 +93,7 @@ aadhaar-gati-tool/
 └── README.md
 
 
+
 ---
 
 ## 📄 Input Data Format
@@ -128,8 +129,9 @@ Kanpur,4200,1800
 ### 1️⃣ Install dependencies
 ```bash
 pip install -r requirements.txt
+```
 
-2️⃣ Run the application
+### 2️⃣ Run the application
 streamlit run app.py
 
 The application will open automatically in your browser.
@@ -153,5 +155,8 @@ GitHub – Version control
 - **Anushree Merothiya** — Data collection and documentation  
 
 
-**📜 Disclaimer**
-This project is developed for educational and hackathon purposes only and  use or access real Aadhaar  data for fair means.
+## 📜 Disclaimer
+
+This project is developed strictly for **educational and hackathon purposes only**.  
+All datasets used are publicly available or sample representations.  
+No unauthorized access to real Aadhaar data is involved.
